@@ -50,11 +50,13 @@
             var gifDiv = $("<div>");
 
             for (var i = 0; i < response.data.length; i++) {
-                                
+                
+                gifView = $("<div class='gifView'>");
+
                 var rate = $("<p>");
                 var rateScore = response.data[i].rating;
 
-                rate.text(rateScore);
+                rate.text("Rating: " + rateScore);
 
                 //--------------------------------------------
                 // Retrieving the URL for the gif (image)
@@ -66,12 +68,15 @@
                 // gifImage.attr("src", response.data[i].images.fixed_height_still.url);
                 gifImage.attr("data-animate", response.data[i].images.fixed_height.url);
                 gifImage.attr("data-still", response.data[i].images.fixed_height_still.url)
-                // gifImage.attr("animate");
+                gifImage.attr("data-state", "animate");
+                
                 gifImage.addClass("gifStates");
 
                 // Appending the gif (image)
-                gifDiv.append(rate);
-                gifDiv.append(gifImage);
+                gifView.append(rate);
+                gifView.append(gifImage);
+                
+                gifDiv.append(gifView);
 
                 console.log(response.data[i].images.fixed_height_still.url);
                 console.log(response.data[i].images.fixed_height.url);
@@ -83,11 +88,12 @@
 
         //--------------------------------------------
 
-        $(".gifStates").on("click", function() {
+        $(document).on("click", ".gifStates", function() {
 
             var gifState = $(this).attr("data-state");
+            console.log("HWKEJFLWKJEFKFEJ");
 
-            if (gifState === "animate") {
+            if (gifState == "animate") {
                 $(this).attr("src", $(this).attr("data-still"));
                 $(this).attr("data-state", "still");
             } else {

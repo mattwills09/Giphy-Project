@@ -16,7 +16,7 @@ button, div, form, input {
   margin: 10px;
 }
 
-#gifs-view {
+.gifView {
     float:left;
 }
 
