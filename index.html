@@ -2,23 +2,24 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Giphy Project</title>
 
   <link rel="stylesheet" type="text/css" href="assets/style.css">
+  <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
 </head>
 
 <body>
 
 <div class="container">
     <h1>'The Office' Themed Gif Search!</h1>
-    <h3><em>Name a character or theme to add:</em></h3>
+    <h3><em>Name a character or theme to add:</em>
     
-    <div id="buttons-view"></div>
-    
+    <div id="buttons-view"></div></h3>
+        
     <form id="gif-form">
-        <label for="gif-input">Add your own themed GIF!</label><br>
-        <input type="text" id="gif-input"><br>
+        <label for="gif-input" id="Add">Add your own themed GIF!</label>
+        <input type="text" id="gif-input">
         <input id="add-gif" type="submit" value="Add your own Gif!">
     </form>
     
@@ -29,7 +30,7 @@
 
     var characters = ["Michael Scott", "Dwight Schrute", "Jim Halpert", "Andy Bernard"];
     
-    //--------------------------------------------
+    //-------------------------------------------------
 
     function displayGif() {
     
@@ -53,29 +54,34 @@
                 
                 gifView = $("<div class='gifView'>");
 
-                var rate = $("<p>");
-                var rateScore = response.data[i].rating;
-
-                rate.text("Rating: " + rateScore);
-
-                //--------------------------------------------
-                // Retrieving the URL for the gif (image)
+                // Retrieving the URL for the gif (image)---------
 
                 var gifImage = $("<img>");
-                // var imageVal = response.data[i].images.fixed_height.url;
 
                 gifImage.attr("src", response.data[i].images.fixed_height.url);
                 // gifImage.attr("src", response.data[i].images.fixed_height_still.url);
                 gifImage.attr("data-animate", response.data[i].images.fixed_height.url);
                 gifImage.attr("data-still", response.data[i].images.fixed_height_still.url)
                 gifImage.attr("data-state", "animate");
-                
                 gifImage.addClass("gifStates");
 
-                // Appending the gif (image)
-                gifView.append(rate);
+                // Getting 'rating' of each gif---------------
+                var rate = $("<p id='title'>");
+                var rateScore = response.data[i].rating;
+
+                rate.text("Gif Rating: " + rateScore);
+
+                // Getting 'title' of each gif----------------
+                var title = $("<p id='title'>");
+                var gifTitle = response.data[i].title;
+
+                title.text("Gif Title: " + gifTitle);
+
+                // Appending the gif image & rating-------------------
                 gifView.append(gifImage);
-                
+                gifView.append(rate);
+                gifView.append(title);
+
                 gifDiv.append(gifView);
 
                 console.log(response.data[i].images.fixed_height_still.url);
@@ -91,7 +97,7 @@
         $(document).on("click", ".gifStates", function() {
 
             var gifState = $(this).attr("data-state");
-            console.log("HWKEJFLWKJEFKFEJ");
+            // console.log("HWKEJFLWKJEFKFEJ");
 
             if (gifState == "animate") {
                 $(this).attr("src", $(this).attr("data-still"));
@@ -111,13 +117,13 @@
         for (var j = 0; j < characters.length; j++) {
     
             var a = $("<button>");
-            // Adding a class of gif-btn to our button
+            // Adding a class of 'gif-btn' to our button
             a.addClass("gif-btn");
             // Adding a data-attribute
             a.attr("data-name", characters[j]);
-            // Providing the initial button text
+            // Providing initial button text
             a.text(characters[j]);
-            // Adding the button to the buttons-view div
+            // Adding the button to the 'buttons-view' div
             $("#buttons-view").append(a);
         }
     }
@@ -131,6 +137,7 @@
             characters.push(topics);
 
             renderButtons();
+            $("#gif-input").val("");
         });
 
         $(document).on("click", ".gif-btn", displayGif);
