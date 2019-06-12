@@ -1,4 +1,4 @@
-# Giphy-Project
+# 'The Office' Giphy Project
 
 For this project we were asked to create a themed GIPHY page, that would call gif images from the Giphy site, had button options pre-set to provide 10 gifs on a topic when clicked on, and using an AJAX call to use the provided API from Giphy.  Also, there needed to be an option for the user to input another search term into a text box to add a button to the screen, and then use that term in a giphy search to add to the top of the page.  Coding the HTML and css was more on the easier side as there was not much body to the page, but the jQuery and AJAX calls were definitely more complicated.  Using our past exercises from class, I was able to layout the adding of buttons and the classes and attributes that went along with them, but the most difficult part for me was the appending the 'rating' and the 'gif' to the page.  I sat with Aaron after class Monday, and we basically just re-wrote the code I had, and go it working.  Most likely there was a small typo or something that we could not find.
 
